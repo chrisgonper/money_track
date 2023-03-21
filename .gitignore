@@ -1,0 +1,13 @@
+#user files
+*.suo
+*.user
+
+#build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+build/
+[Bb]in/
+[Oo]bj/
+.vs/
+.[Ss]onarlint/
