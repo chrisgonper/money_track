@@ -1,0 +1,37 @@
+﻿@model IEnumerable<CategoryGroupModel>
+@{
+    ViewData["Title"] = "Grupos de categorias";
+}
+<h1>Grupos de categorias</h1>
+<h4>Los grupos nos sirven para agrupar las diferentes categorias en la que se van los gastos</h4>
+
+<a class="btn btn-primary mb-3" asp-action="Create">Crear nuevo</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var categoryGroup in Model)
+        {
+            <tr>
+                <td>
+                    <a class="btn btn-success text-white" title="Editar" asp-action="Edit" asp-route-id="@categoryGroup.GroupId"><i class="bi bi-pencil"></i></a>
+                    <a class="btn btn-danger" title="Borrar" onclick="deleteCategory(@categoryGroup.GroupId, 'CategoryGroup')"><i class="bi bi-trash"></i></a>
+                </td>
+                <td>
+                    @categoryGroup.GroupName
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<partial name="_DeleteModalPartial" />
+
+@section Scripts{
+    <script src="~/js/custom.js"></script>
+}

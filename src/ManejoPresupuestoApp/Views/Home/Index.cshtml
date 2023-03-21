@@ -1,0 +1,63 @@
+﻿@model IEnumerable<TransactionGroupByDateModel>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<a class="btn btn-primary mb-3" asp-action="Create">Crear nueva transaccion</a>
+<partial name="_MonthChangerPartial" />
+
+<div class="row mt-5">
+    <div class="col-4"></div>
+    <div class="col-4">
+        <div class="card text-center">
+            <div class="card-header bg-dark text-white">
+                Gastos del mes
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">@Model.Sum(g => g.Transactions.Sum(t => t.Amount)).ToString("C")</h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-4"></div>
+</div>
+@if (!Model.Any())
+{
+    <div class="alert alert-info mt-5">
+        No hay transacciones para este mes!
+    </div>
+}
+@foreach (var transactionGroup in Model)
+{
+    <div class="row">
+        <h2 class="mb-3">@transactionGroup.TransactionDate.ToString("dddd dd")</h2>
+        
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <td style="width:25%"></td>
+                    <td style="width:20%"></td>
+                    <td style="width:20%"></td>
+                    <td style="width:20%"></td>
+                    <td style="width:15%"></td>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var transaction in transactionGroup.Transactions)
+                {
+                    <tr>
+                        <td>
+                            <a class="btn btn-success text-white" title="Editar" asp-action="Edit" asp-route-id="@transaction.TransactionId"><i class="bi bi-pencil"></i></a>
+                            <a class="btn btn-danger" title="Borrar" asp-action="Delete" asp-route-id="@transaction.TransactionId"><i class="bi bi-trash"></i></a>
+                        </td>
+                        <td>@transaction.GroupName</td>
+                        <td>@transaction.CategoryName</td>
+                        <td>@transaction.Amount.ToString("C")</td>
+                        <td>@transaction.CategoryIcon</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

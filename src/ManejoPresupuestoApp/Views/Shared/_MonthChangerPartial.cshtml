@@ -1,0 +1,27 @@
+﻿
+@{
+    DateTime currentDate = Convert.ToDateTime(ViewData["CurrentDate"]);
+    string currentMonth = currentDate.ToString("MMMM yyyy");
+
+    int getMonth(int increment)
+    {
+        return currentDate.AddMonths(increment).Month;
+    }
+    int getYear(int increment)
+    {
+        return currentDate.AddMonths(increment).Year;
+    }
+}
+
+<div class="row text-center">
+    <div class="col-12">
+        <a class="btn btn-secondary" asp-controller="Home" 
+                                     asp-route-month="@getMonth(-1)"
+                                     asp-route-year="@getYear(-1)"><i class="bi bi-caret-left"></i></a>
+        <a class="btn btn-light">@currentMonth</a>
+        <a class="btn btn-secondary" asp-controller="Home"
+                                     asp-route-month="@getMonth(1)"
+                                     asp-route-year="@getYear(1)"><i class="bi bi-caret-right"></i></a>
+    </div>
+</div>
+

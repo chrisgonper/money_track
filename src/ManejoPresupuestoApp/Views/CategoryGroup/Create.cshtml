@@ -1,0 +1,21 @@
+﻿@model CategoryGroupModel
+@{
+    ViewData["Title"] = "Crear nuevo grupo";
+}
+<h1>Crear nuevo grupo</h1>
+<h4>Los grupos nos sirven para agrupar las diferentes categorias en la que se van los gastos</h4>
+<form asp-action="Create" asp-controller="CategoryGroup">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="mb-3">
+        <label asp-for="GroupName" class="form-label"></label>
+        <input asp-for="GroupName" class="form-control" />
+        <span asp-validation-for="GroupName" class="text-danger"></span>
+    </div>
+    <button class="btn btn-primary">Guardar</button>
+    <a class="btn btn-secondary" asp-action="Index">Cancelar</a>
+</form>
+
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
